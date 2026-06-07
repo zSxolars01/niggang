@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NIGGANG — Equipo Competitivo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #00aaff;
+      --dark: #050810;
+      --card: #0a0f1e;
+      --border: #001a3a;
+      --text: #c8d8f0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 17px;
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      height: 64px;
+      background: rgba(5,8,16,0.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      color: var(--blue);
+      text-shadow: 0 0 16px var(--blue);
+      letter-spacing: 3px;
+    }
+
+    nav ul { list-style: none; display: flex; gap: 2.5rem; }
+
+    nav ul a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--blue); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 80px 5vw 60px;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 40%, rgba(0,102,255,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(0,170,255,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      font-size: 0.8rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(3.5rem, 12vw, 9rem);
+      font-weight: 900;
+      line-height: 1;
+      color: #fff;
+      text-shadow: 0 0 30px rgba(0,170,255,0.7), 0 0 80px rgba(0,102,255,0.4);
+      letter-spacing: 6px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      letter-spacing: 2px;
+      color: rgba(200,216,240,0.65);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 2.2rem;
+      border: 2px solid var(--blue);
+      color: var(--blue);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--blue);
+      color: #000;
+      box-shadow: 0 0 28px rgba(0,170,255,0.55);
+    }
+
+    /* SECTIONS */
+    section { padding: 100px 5vw; }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--blue);
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      color: #fff;
+      margin-bottom: 1.2rem;
+    }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), transparent);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ABOUT */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5vw;
+      align-items: center;
+    }
+
+    .about-text p {
+      line-height: 1.85;
+      color: rgba(200,216,240,0.75);
+      margin-bottom: 1rem;
+    }
+
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+
+    .stat-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--blue);
+      padding: 1.6rem 1.2rem;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      color: var(--blue);
+      font-weight: 900;
+      text-shadow: 0 0 20px rgba(0,170,255,0.5);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(200,216,240,0.5);
+      margin-top: 0.3rem;
+    }
+
+    /* MEMBERS GRID */
+    .members-section { background: #030609; }
+
+    .section-header { text-align: center; }
+    .section-header .divider { margin: 0 auto 3rem; }
+
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .member-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem 1.5rem 1.8rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .member-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .member-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,102,255,0.2); }
+    .member-card:hover::before { opacity: 1; }
+
+    .member-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid var(--blue);
+      display: block;
+      margin: 0 auto 1rem;
+      object-fit: cover;
+      box-shadow: 0 0 20px rgba(0,102,255,0.3);
+    }
+
+    .member-nick {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      color: #fff;
+      letter-spacing: 1px;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-rank {
+      font-size: 0.75rem;
+      color: rgba(200,216,240,0.45);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .role-badge {
+      display: inline-block;
+      padding: 0.25rem 0.9rem;
+      border: 1px solid rgba(0,170,255,0.4);
+      border-radius: 20px;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(0,102,255,0.08);
+      margin-bottom: 0.6rem;
+    }
+
+    .card-hint {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(200,216,240,0.25);
+      margin-top: 0.4rem;
+    }
+
+    .role-mid    { border-color: rgba(255,80,180,0.5);  color: #ff50b4; background: rgba(255,80,180,0.07); }
+    .role-top    { border-color: rgba(255,160,0,0.5);   color: #ffa000; background: rgba(255,160,0,0.07); }
+    .role-adc    { border-color: rgba(255,60,60,0.5);   color: #ff4040; background: rgba(255,60,60,0.07); }
+    .role-jungle { border-color: rgba(0,220,100,0.5);   color: #00dc64; background: rgba(0,220,100,0.07); }
+    .role-support{ border-color: rgba(0,200,255,0.5);   color: #00c8ff; background: rgba(0,200,255,0.07); }
+
+    /* ACADEMIA SECTION */
+    #academia { background: #020508; }
+
+    .academia-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(0,170,255,0.07);
+      border: 1px solid rgba(0,170,255,0.2);
+      border-radius: 4px;
+      padding: 0.4rem 1rem;
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(200,216,240,0.5);
+      margin-bottom: 2rem;
+    }
+
+    .academia-banner span { color: var(--blue); }
+
+    /* MODAL OVERLAY */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,5,15,0.88);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+      backdrop-filter: blur(6px);
+    }
+
+    .modal-overlay.active { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: #080e1d;
+      border: 1px solid #002050;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 660px;
+      position: relative;
+      overflow: hidden;
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.28s cubic-bezier(0.22,1,0.36,1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active .modal { transform: translateY(0) scale(1); }
+
+    .modal-top-bar { height: 4px; width: 100%; flex-shrink: 0; }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      padding: 1.8rem 2rem 1.4rem;
+      border-bottom: 1px solid #001530;
+    }
+
+    .modal-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid;
+    }
+
+    .modal-info { flex: 1; }
+
+    .modal-nick {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.35rem;
+      color: #fff;
+      letter-spacing: 1px;
+      margin-bottom: 0.3rem;
+    }
+
+    .modal-rank {
+      font-size: 0.8rem;
+      color: rgba(200,216,240,0.45);
+      margin-top: 0.3rem;
+      letter-spacing: 0.5px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.2rem; right: 1.4rem;
+      background: none;
+      border: none;
+      color: rgba(200,216,240,0.4);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover { color: #fff; }
+
+    /* INTRO */
+    .modal-intro {
+      padding: 1.2rem 2rem;
+      border-bottom: 1px solid #001530;
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: rgba(200,216,240,0.7);
+      font-style: italic;
+    }
+
+    .modal-body {
+      padding: 1.5rem 2rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem;
+    }
+
+    .modal-section-title {
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(200,216,240,0.35);
+      margin-bottom: 0.7rem;
+      font-weight: 700;
+    }
+
+    .picks-list { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .pick-item {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: rgba(0,30,60,0.5);
+      border: 1px solid #001a3a;
+      border-radius: 4px;
+      padding: 0.45rem 0.8rem;
+    }
+
+    .pick-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 4px;
+      object-fit: cover;
+      border: 1px solid rgba(0,170,255,0.3);
+      background: #001530;
+      flex-shrink: 0;
+    }
+
+    .pick-name { font-weight: 700; color: #fff; font-size: 0.92rem; flex: 1; }
+    .pick-wr { font-size: 0.75rem; font-weight: 700; color: rgba(200,216,240,0.5); }
+
+    .pick-tier {
+      font-size: 0.63rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      margin-left: 0.3rem;
+    }
+
+    .tier-s { background: rgba(255,200,0,0.15); color: #ffc800; border: 1px solid rgba(255,200,0,0.3); }
+    .tier-a { background: rgba(0,220,100,0.12); color: #00dc64; border: 1px solid rgba(0,220,100,0.3); }
+
+    .info-block {
+      background: rgba(0,30,60,0.4);
+      border: 1px solid #001a3a;
+      border-radius: 4px;
+      padding: 0.7rem 1rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .info-block-label {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(200,216,240,0.3);
+      margin-bottom: 0.2rem;
+    }
+
+    .info-block-value { font-weight: 700; color: #fff; font-size: 0.92rem; }
+
+    .mobalytics-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue);
+      text-decoration: none;
+      border: 1px solid rgba(0,170,255,0.3);
+      border-radius: 3px;
+      padding: 0.4rem 0.8rem;
+      transition: background 0.2s;
+    }
+
+    .mobalytics-link:hover { background: rgba(0,170,255,0.1); }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2.5rem 5vw;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      color: rgba(200,216,240,0.3);
+      text-transform: uppercase;
+    }
+
+    footer span { color: var(--blue); }
+
+    @media (max-width: 720px) {
+      #about { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .modal-body { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) { nav ul { display: none; } }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">NIGGANG</div>
+  <ul>
+    <li><a href="#hero">Inicio</a></li>
+    <li><a href="#about">Nosotros</a></li>
+    <li><a href="#members">Equipo</a></li>
+    <li><a href="#academia">Academia</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-tag">Equipo Competitivo · League of Legends</p>
+  <h1 class="hero-title">NIGGANG</h1>
+  <p class="hero-sub">Cinco jugadores. Una sola mentalidad. Dominamos la Grieta desde las sombras.</p>
+  <a href="#members" class="btn">Ver Roster</a>
+</section>
+
+<!-- QUIENES SOMOS -->
+<section id="about">
+  <div class="about-text">
+    <p class="section-label">Quienes Somos</p>
+    <h2 class="section-title">La organizacion<br/>detras del nombre</h2>
+    <div class="divider"></div>
+    <p>
+      NIGGANG es un equipo competitivo de League of Legends formado por jugadores comprometidos con el alto rendimiento y la mejora constante. Nacimos con el objetivo de dejar huella en la escena competitiva.
+    </p>
+    <p>
+      Cada miembro aporta una habilidad unica: mecanicas afiladas, vision estrategica y una comunicacion brutal en los momentos criticos. Juntos somos mas que la suma de las partes.
+    </p>
+  </div>
+  <div class="about-stats">
+    <div class="stat-box">
+      <div class="stat-number">5</div>
+      <div class="stat-label">Titulares</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">5</div>
+      <div class="stat-label">Academia</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">∞</div>
+      <div class="stat-label">Grind</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">0</div>
+      <div class="stat-label">Excusas</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROSTER TITULAR -->
+<section id="members" class="members-section">
+  <div class="section-header">
+    <p class="section-label">Roster Oficial</p>
+    <h2 class="section-title">Equipo Titular</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="members-grid">
+    <div class="member-card" onclick="openModal('juanYF')">
+      <img class="member-avatar" src="https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/5915.png?1" alt="juanYF" />
+      <div class="member-nick">juanYF</div>
+      <div class="card-rank">Platinum 2 · 43 LP</div>
+      <span class="role-badge role-top">Top Laner</span>
+      <p class="card-hint">Ver perfil</p>
+    </div>
+
+    <div class="member-card" onclick="openModal('hwidban')">
+      <img class="member-avatar" src="https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/5287.png?1" alt="hwid ban" />
+      <div class="member-nick">hwid ban</div>
+      <div class="card-rank">Master · 517 LP</div>
+      <span class="role-badge role-jungle">Jungle</span>
+      <p class="card-hint">Ver perfil</p>
+    </div>
+
+    <div class="member-card" onclick="openModal('zSxolars')">
+      <img class="member-avatar" src="https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/744.png?1" alt="zSxolars" />
+      <div class="member-nick">zSxolars</div>
+      <div class="card-rank">Platinum 4 · 92 LP</div>
+      <span class="role-badge role-mid">Mid Laner</span>
+      <p class="card-hint">Ver perfil</p>
+    </div>
+
+    <div class="member-card" onclick="openModal('DizzyL')">
+      <img class="member-avatar" src="https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/4020.png?1" alt="DizzyL" />
+      <div class="member-nick">DizzyL</div>
+      <div class="card-rank">Diamond 4 · 3 LP</div>
+      <span class="role-badge role-adc">ADC</span>
+      <p class="card-hint">Ver perfil</p>
+    </div>
+
+    <div class="member-card" onclick="openModal('PykeTyson')">
+      <img class="member-avatar" src="https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/4065.png?1" alt="Pyke Tyson" />
+      <div class="member-nick">Pyke Tyson</div>
+      <div class="card-rank">Emerald 4 · 99 LP</div>
+      <span class="role-badge role-support">Support</span>
+      <p class="card-hint">Ver perfil</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACADEMIA -->
+<section id="academia" class="members-section">
+  <div class="section-header">
+    <p class="section-label">Desarrollo y Futuro</p>
+    <h2 class="section-title">Equipo Academia</h2>
+    <div class="divider"></div>
+    <div class="academia-banner">Suplentes · <span>NIGGANG Academy</span></div>
+  </div>
+
+  <div class="members-grid">
+    <div class="member-card" onclick="openModal('stately')">
+      <img class="member-avatar" src="https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/7120.png?1" alt="stately" />
+      <div class="member-nick">stately</div>
+      <div class="card-rank">Emerald 4 · 42 LP</div>
+      <span class="role-badge role-top">Top Laner</span>
+      <p class="card-hint">Ver perfil</p>
+    </div>
+
+    <div class="member-card" onclick="openModal('Risardo')">
+      <img class="member-avatar" src="https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/907.png?1" alt="Risardo" />
+      <div class="member-nick">Risardo</div>
+      <div class="card-rank">Diamond 4 · 83 LP</div>
+      <span class="role-badge role-jungle">Jungle</span>
+      <p class="card-hint">Ver perfil</p>
+    </div>
+
+    <div class="member-card" onclick="openModal('T1Tocino')">
+      <img class="member-avatar" src="https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/4078.png?1" alt="T1 Tocino" />
+      <div class="member-nick">T1 Tocino</div>
+      <div class="card-rank">Platinum 4 · 13 LP</div>
+      <span class="role-badge role-mid">Mid Laner</span>
+      <p class="card-hint">Ver perfil</p>
+    </div>
+
+    <div class="member-card" onclick="openModal('DjChurches')">
+      <img class="member-avatar" src="https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/7123.png?1" alt="DjChurches" />
+      <div class="member-nick">DjChurches</div>
+      <div class="card-rank">Gold 3 · 14 LP</div>
+      <span class="role-badge role-adc">ADC</span>
+      <p class="card-hint">Ver perfil</p>
+    </div>
+
+    <div class="member-card" onclick="openModal('Cangreburgito')">
+      <img class="member-avatar" src="https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/6584.png?1" alt="Cangreburgito69" />
+      <div class="member-nick">Cangreburgito69</div>
+      <div class="card-rank">Unranked</div>
+      <span class="role-badge role-support">Support</span>
+      <p class="card-hint">Ver perfil</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 <span>NIGGANG</span> &mdash; Todos los derechos reservados</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modalBox">
+    <div class="modal-top-bar" id="modalBar"></div>
+    <div class="modal-header">
+      <img class="modal-avatar" id="modalAvatar" src="" alt="" />
+      <div class="modal-info">
+        <div class="modal-nick" id="modalNick"></div>
+        <span class="role-badge" id="modalRole"></span>
+        <div class="modal-rank" id="modalRank"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-intro" id="modalIntro"></div>
+    <div class="modal-body">
+      <div>
+        <p class="modal-section-title">Picks Principales</p>
+        <div class="picks-list" id="modalPicks"></div>
+      </div>
+      <div>
+        <p class="modal-section-title">Informacion</p>
+        <div id="modalInfo"></div>
+        <a id="modalMoba" class="mobalytics-link" href="#" target="_blank" rel="noopener">Ver en OP.GG</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const CDN = 'https://cdn.mobalytics.gg/assets/lol/images/dd/champions/icons/';
+
+  const players = {
+
+    /* ── TITULARES ── */
+
+    juanYF: {
+      nick: 'juanYF', role: 'Top Laner', roleClass: 'role-top',
+      avatar: 'https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/5915.png?1',
+      barColor: 'linear-gradient(90deg,#ffa000,#ff6000)', avatarBorder: '#ffa000',
+      rank: 'Platinum 2 · 43 LP · 58.8% WR',
+      intro: 'El tanque inamovible del equipo. Con un 83.3% de winrate en Mordekaiser y una presencia dominante en linea, juanYF convierte el Top en territorio propio desde el minuto 1. Su estilo agresivo y su capacidad de cargar teamfights hacen de el la piedra angular del frontline de NIGGANG.',
+      mobaUrl: 'https://op.gg/lol/summoners/lan/crybaby-616SS',
+      picks: [
+        { name: 'Mordekaiser', key: 'mordekaiser', wr: '83.3%', tier: 'S' },
+        { name: "Cho'Gath",    key: 'chogath',     wr: '66.7%', tier: 'S' },
+        { name: 'Gangplank',   key: 'gangplank',   wr: '100%',  tier: 'S' },
+        { name: 'Pantheon',    key: 'pantheon',    wr: '50.0%', tier: 'A' },
+      ],
+      info: { 'Servidor': 'LAN', 'Partidas Top': '26 juegos', 'Estilo': 'Tanque / Carry', 'KDA Medio': '6.4 / 6.8 / 8.3' }
+    },
+
+    hwidban: {
+      nick: 'hwid ban', role: 'Jungle', roleClass: 'role-jungle',
+      avatar: 'https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/5287.png?1',
+      barColor: 'linear-gradient(90deg,#00dc64,#009940)', avatarBorder: '#00dc64',
+      rank: 'Master · 517 LP · 50.1% WR',
+      intro: 'El jugador mas rankeado del roster. hwid ban alcanza Master con 517 LP siendo Evelynn main con mas de 180 partidas en el rol. Su dominio del mapa desde la invisibilidad le permite controlar el tempo de la partida y aparecer donde mas duele antes de que el rival pueda reaccionar.',
+      mobaUrl: 'https://op.gg/lol/summoners/lan/Checo-Jgler',
+      picks: [
+        { name: 'Evelynn', key: 'evelynn', wr: '54.1%', tier: 'S' },
+        { name: 'Ambessa', key: 'ambessa', wr: '43.5%', tier: 'A' },
+        { name: 'Talon',   key: 'talon',   wr: '46.2%', tier: 'A' },
+        { name: 'Ekko',    key: 'ekko',    wr: '30.0%', tier: 'A' },
+      ],
+      info: { 'Servidor': 'LAN', 'Partidas Jungle': '291 juegos', 'Estilo': 'Assassin / Invade', 'KDA Medio': '8.0 / 6.2 / 7.9' }
+    },
+
+    zSxolars: {
+      nick: 'zSxolars', role: 'Mid Laner', roleClass: 'role-mid',
+      avatar: 'https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/744.png?1',
+      barColor: 'linear-gradient(90deg,#ff50b4,#c000a0)', avatarBorder: '#ff50b4',
+      rank: 'Platinum 4 · 92 LP · 45.6% WR',
+      intro: 'El cerebro del mid. zSxolars construye su juego en torno a Veigar, acumulando stacks game tras game hasta convertirse en una amenaza de daño sin techo. Con un 64.3% de winrate en su pick mas jugado, demuestra que la paciencia y el posicionamiento son su mayor arma.',
+      mobaUrl: 'https://op.gg/lol/summoners/lan/zSxolars-MTLSA',
+      picks: [
+        { name: 'Veigar', key: 'veigar', wr: '64.3%', tier: 'S' },
+        { name: 'Viktor', key: 'viktor', wr: '25.0%', tier: 'A' },
+        { name: 'Akali',  key: 'akali',  wr: '50.0%', tier: 'A' },
+        { name: 'Sylas',  key: 'sylas',  wr: '50.0%', tier: 'A' },
+      ],
+      info: { 'Servidor': 'LAN', 'Partidas Mid': '26 juegos', 'Estilo': 'Mage / Assassin', 'KDA Medio': '5.6 / 8.0 / 6.8' }
+    },
+
+    DizzyL: {
+      nick: 'DizzyL', role: 'ADC', roleClass: 'role-adc',
+      avatar: 'https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/4020.png?1',
+      barColor: 'linear-gradient(90deg,#ff4040,#aa0000)', avatarBorder: '#ff4040',
+      rank: 'Diamond 4 · 3 LP · 52.8% WR',
+      intro: 'El carry indiscutible de NIGGANG. DizzyL es el ADC mas experimentado del roster con mas de 500 partidas en la temporada. Sus numeros en linea son brutales: ventaja de oro positiva en minuto 15 y un CS/min de 7.9 que le dan una ventaja de recursos que el equipo convierte en victorias.',
+      mobaUrl: 'https://op.gg/lol/summoners/lan/DizzyL-nlgan',
+      picks: [
+        { name: 'Jhin',     key: 'jhin',     wr: '61.0%', tier: 'S' },
+        { name: 'Samira',   key: 'samira',   wr: '71.4%', tier: 'S' },
+        { name: 'Aphelios', key: 'aphelios', wr: '52.9%', tier: 'A' },
+        { name: "Kai'Sa",   key: 'kaisa',    wr: '60.0%', tier: 'A' },
+      ],
+      info: { 'Servidor': 'LAN', 'Partidas ADC': '105 juegos', 'Estilo': 'Hypercarry / Positioning', 'KDA Medio': '9.2 / 5.0 / 7.4' }
+    },
+
+    PykeTyson: {
+      nick: 'Pyke Tyson', role: 'Support', roleClass: 'role-support',
+      avatar: 'https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/4065.png?1',
+      barColor: 'linear-gradient(90deg,#00c8ff,#0066cc)', avatarBorder: '#00c8ff',
+      rank: 'Emerald 4 · 99 LP · 55.8% WR',
+      intro: 'El jugador mas impredecible del equipo. Pyke Tyson se mueve en Kayn con una fluidez que pocos igualan: 71 partidas, 59.2% de winrate y la capacidad de aparecer en cualquier punto del mapa para cambiar el estado de una fight. Su playstyle mezcla el instinto asesino con la inteligencia de un Support de alto nivel.',
+      mobaUrl: 'https://op.gg/lol/summoners/lan/Pyke%20Tyson-1389',
+      picks: [
+        { name: 'Kayn',     key: 'kayn',     wr: '59.2%', tier: 'S' },
+        { name: 'Viego',    key: 'viego',    wr: '55.6%', tier: 'S' },
+        { name: 'Volibear', key: 'volibear', wr: '60.0%', tier: 'S' },
+        { name: 'Amumu',    key: 'amumu',    wr: '66.7%', tier: 'A' },
+      ],
+      info: { 'Servidor': 'LAN', 'Partidas': '102 juegos', 'Estilo': 'Engage / Assassin', 'KDA Medio': '6.8 / 5.5 / 8.4' }
+    },
+
+    /* ── ACADEMIA ── */
+
+    stately: {
+      nick: 'stately', role: 'Top Laner', roleClass: 'role-top',
+      avatar: 'https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/7120.png?1',
+      barColor: 'linear-gradient(90deg,#ffa000,#ff6000)', avatarBorder: '#ffa000',
+      rank: 'Emerald 4 · 42 LP · 44.8% WR',
+      intro: 'El Top de la academia con perfil de split pusher y duelista. stately usa Zed en el Top para crear presion lateral constante, mientras que Veigar le da una dimension de teamfight inesperada. Con una winrate del 80% cuando juega con el roster titular, su integracion al equipo es natural.',
+      mobaUrl: 'https://op.gg/lol/summoners/lan/stately-LAN',
+      picks: [
+        { name: 'Zed',    key: 'zed',    wr: '54.5%', tier: 'S' },
+        { name: 'Veigar', key: 'veigar', wr: '66.7%', tier: 'S' },
+        { name: 'Darius', key: 'darius', wr: '0.0%',  tier: 'A' },
+        { name: 'Teemo',  key: 'teemo',  wr: '100%',  tier: 'A' },
+      ],
+      info: { 'Servidor': 'LAN', 'Partidas Top': '27 juegos', 'Estilo': 'Split Push / Duelist', 'KDA Medio': '6.1 / 7.7 / 6.1' }
+    },
+
+    Risardo: {
+      nick: 'Risardo', role: 'Jungle', roleClass: 'role-jungle',
+      avatar: 'https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/907.png?1',
+      barColor: 'linear-gradient(90deg,#00dc64,#009940)', avatarBorder: '#00dc64',
+      rank: 'Diamond 4 · 83 LP · 48.5% WR',
+      intro: 'El Jungla de academia con el rango mas alto de su grupo. Risardo lleva a Udyr con un sobresaliente 70.8% de winrate y complementa su pool con Zyra Jungle, un pick de nicho que le da una dimension de engage y vision diferente. Comparte muchas partidas con el roster titular, lo que facilita su transicion al equipo principal.',
+      mobaUrl: 'https://op.gg/lol/summoners/lan/Risardo-LAN',
+      picks: [
+        { name: 'Udyr',    key: 'udyr',    wr: '70.8%', tier: 'S' },
+        { name: 'Zyra',    key: 'zyra',    wr: '61.5%', tier: 'S' },
+        { name: 'Kindred', key: 'kindred', wr: '37.5%', tier: 'A' },
+        { name: 'Sejuani', key: 'sejuani', wr: '20.0%', tier: 'A' },
+      ],
+      info: { 'Servidor': 'LAN', 'Partidas Jungle': '77 juegos', 'Estilo': 'Tanque / Engage', 'KDA Medio': '6.7 / 5.4 / 10.1' }
+    },
+
+    T1Tocino: {
+      nick: 'T1 Tocino', role: 'Mid Laner', roleClass: 'role-mid',
+      avatar: 'https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/4078.png?1',
+      barColor: 'linear-gradient(90deg,#ff50b4,#c000a0)', avatarBorder: '#ff50b4',
+      rank: 'Platinum 4 · 13 LP · 52.6% WR',
+      intro: 'El Mid de academia con el pool mas variado del grupo. T1 Tocino domina Talon con un 75% de winrate y complementa con Zoe y Qiyana, mostrando una versatilidad tactica poco comun. Su capacidad de roaming y de crear presion en otras lineas lo convierte en un comodin valioso para el equipo.',
+      mobaUrl: 'https://op.gg/lol/summoners/lan/T1%20%C5%A4ocino-God',
+      picks: [
+        { name: 'Talon',  key: 'talon',  wr: '75.0%', tier: 'S' },
+        { name: 'Qiyana', key: 'qiyana', wr: '66.7%', tier: 'S' },
+        { name: 'Zoe',    key: 'zoe',    wr: '50.0%', tier: 'A' },
+        { name: 'Ekko',   key: 'ekko',   wr: '100%',  tier: 'A' },
+      ],
+      info: { 'Servidor': 'LAN', 'Partidas Mid': '28 juegos', 'Estilo': 'Assassin / Roamer', 'KDA Medio': '6.9 / 7.8 / 7.0' }
+    },
+
+    DjChurches: {
+      nick: 'DjChurches', role: 'ADC', roleClass: 'role-adc',
+      avatar: 'https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/7123.png?1',
+      barColor: 'linear-gradient(90deg,#ff4040,#aa0000)', avatarBorder: '#ff4040',
+      rank: 'Gold 3 · 14 LP · 52.8% WR',
+      intro: 'El ADC de academia con los numeros mas prometedores del grupo. DjChurches brilla con Yunara registrando un 69.7% de winrate en 33 partidas, y muestra una ventaja de daño positiva sobre sus rivales en linea. Con 150 partidas en la temporada y presencia constante en el roster de NIGGANG, su desarrollo es uno de los mas solidos.',
+      mobaUrl: 'https://mobalytics.gg/lol/profile/lan/djchurches-nigan/overview',
+      picks: [
+        { name: 'Yunara',  key: 'yunara',  wr: '69.7%', tier: 'S' },
+        { name: "Kai'Sa",  key: 'kaisa',   wr: '50.0%', tier: 'A' },
+        { name: 'Jhin',    key: 'jhin',    wr: '66.7%', tier: 'A' },
+        { name: 'Ashe',    key: 'ashe',    wr: '44.4%', tier: 'A' },
+      ],
+      info: { 'Servidor': 'LAN', 'Partidas ADC': '102 juegos', 'Estilo': 'Scaling / Damage', 'KDA Medio': '9.1 / 6.1 / 8.4' }
+    },
+
+    Cangreburgito: {
+      nick: 'Cangreburgito69', role: 'Support', roleClass: 'role-support',
+      avatar: 'https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/6584.png?1',
+      barColor: 'linear-gradient(90deg,#00c8ff,#0066cc)', avatarBorder: '#00c8ff',
+      rank: 'En desarrollo',
+      intro: 'El jugador mas nuevo del proyecto NIGGANG. Cangreburgito69 llega con hambre de mejorar y una actitud competitiva que encaja con la cultura del equipo. Aunque sus partidas rankeadas son pocas, sus numeros en normal muestran un jugador en crecimiento constante con buenas mecanicas de base y disposicion para aprender.',
+      mobaUrl: 'https://mobalytics.gg/lol/profile/lan/cangreburgito69-6969/overview',
+      picks: [
+        { name: 'Veigar', key: 'veigar', wr: '100%',  tier: 'S' },
+      ],
+      info: { 'Servidor': 'LAN', 'Partidas': '7 juegos', 'Estilo': 'En desarrollo', 'Rol en equipo': 'Suplente Flex' }
+    },
+  };
+
+  function openModal(id) {
+    const p = players[id];
+    if (!p) return;
+
+    document.getElementById('modalBar').style.background = p.barColor;
+
+    const av = document.getElementById('modalAvatar');
+    av.src = p.avatar; av.alt = p.nick;
+    av.style.borderColor = p.avatarBorder;
+
+    document.getElementById('modalNick').textContent = p.nick;
+    document.getElementById('modalRank').textContent = p.rank;
+
+    const roleEl = document.getElementById('modalRole');
+    roleEl.textContent = p.role;
+    roleEl.className = 'role-badge ' + p.roleClass;
+
+    document.getElementById('modalIntro').textContent = p.intro;
+
+    document.getElementById('modalPicks').innerHTML = p.picks.map(pk => `
+      <div class="pick-item">
+        <img class="pick-icon" src="${CDN}${pk.key}.png?v9" onerror="this.style.opacity='0.2'" alt="${pk.name}" />
+        <span class="pick-name">${pk.name}</span>
+        <span class="pick-wr">${pk.wr}</span>
+        <span class="pick-tier tier-${pk.tier.toLowerCase()}">${pk.tier}</span>
+      </div>
+    `).join('');
+
+    document.getElementById('modalInfo').innerHTML = Object.entries(p.info).map(([l, v]) => `
+      <div class="info-block">
+        <div class="info-block-label">${l}</div>
+        <div class="info-block-value">${v}</div>
+      </div>
+    `).join('');
+
+    document.getElementById('modalMoba').href = p.mobaUrl;
+
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
