@@ -924,7 +924,7 @@
   const CDN = `https://ddragon.leagueoflegends.com/cdn/${PATCH}/img/champion/`;
 
   function champImg(key) {
-    const exceptions = { kaisa: 'KaiSa', chogath: 'Chogath' };
+    const exceptions = { kaisa: 'Kaisa', chogath: 'Chogath' };
     const name = exceptions[key] || (key.charAt(0).toUpperCase() + key.slice(1));
     return CDN + name + '.png';
   }
