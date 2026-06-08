@@ -924,7 +924,15 @@
   const CDN = `https://ddragon.leagueoflegends.com/cdn/${PATCH}/img/champion/`;
 
   function champImg(key) {
-    const exceptions = { kaisa: 'Kaisa', chogath: 'Chogath' };
+    const exceptions = {
+      kaisa: 'Kaisa', chogath: 'Chogath', khazix: 'Khazix',
+      reksai: 'RekSai', kogmaw: 'KogMaw', velkoz: 'Velkoz',
+      belveth: 'Belveth', nunu: 'Nunu', aurelionsol: 'AurelionSol',
+      drmundo: 'DrMundo', jarvaniv: 'JarvanIV', leesin: 'LeeSin',
+      masteryi: 'MasterYi', missfortune: 'MissFortune', monkeyking: 'MonkeyKing',
+      nunuwillump: 'Nunu', twistedfate: 'TwistedFate', xinzhao: 'XinZhao',
+      tahmkench: 'TahmKench', rakan: 'Rakan', wukong: 'MonkeyKing',
+    };
     const name = exceptions[key] || (key.charAt(0).toUpperCase() + key.slice(1));
     return CDN + name + '.png';
   }
