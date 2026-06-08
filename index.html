@@ -229,10 +229,23 @@
 
     .members-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(5, 1fr);
       gap: 1.5rem;
       max-width: 1100px;
       margin: 0 auto;
+    }
+
+    .members-grid .card-suplente {
+      grid-column: 5;
+    }
+
+    @media (max-width: 900px) {
+      .members-grid { grid-template-columns: repeat(3, 1fr); }
+      .members-grid .card-suplente { grid-column: auto; }
+    }
+
+    @media (max-width: 600px) {
+      .members-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     .member-card {
@@ -1117,7 +1130,7 @@
       <p class="card-hint">Ver perfil</p>
     </div>
 
-    <div class="member-card" onclick="openModal('zSxolars')">
+    <div class="member-card card-suplente" onclick="openModal('zSxolars')">
       <img class="member-avatar" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/744.jpg" alt="zSxolars" />
       <div class="member-nick">zSxolars</div>
       <div class="card-rank">Platinum 4 · 92 LP</div>
