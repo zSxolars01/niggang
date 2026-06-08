@@ -297,6 +297,15 @@
     /* ACADEMIA SECTION */
     #academia { background: #020508; }
 
+    .ranks-updated {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 2px;
+      color: rgba(200,216,240,0.25);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
     .academia-banner {
       display: inline-flex;
       align-items: center;
@@ -640,6 +649,7 @@
     <p class="section-label">Roster Oficial</p>
     <h2 class="section-title">Equipo Titular</h2>
     <div class="divider"></div>
+    <span class="ranks-updated">Cargando rangos...</span>
   </div>
 
   <div class="members-grid">
@@ -1042,6 +1052,37 @@
   }
 
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ── AUTO-UPDATE RANKS ──
+  async function loadRanks() {
+    try {
+      const res = await fetch('ranks.json?t=' + Date.now());
+      if (!res.ok) return;
+      const data = await res.json();
+      const ranks = data.players || {};
+
+      Object.entries(ranks).forEach(([pid, info]) => {
+        // update cards
+        document.querySelectorAll(`[onclick="openModal('${pid}')"] .card-rank`)
+          .forEach(el => el.textContent = info.display);
+        // update player data for modal
+        if (players[pid]) {
+          players[pid].rank = `${info.display} · ${info.wr} WR`;
+        }
+      });
+
+      // show last updated timestamp
+      if (data.updated) {
+        const d = new Date(data.updated);
+        const label = d.toLocaleDateString('es-MX', { day:'2-digit', month:'short', year:'numeric' });
+        document.querySelectorAll('.ranks-updated').forEach(el => el.textContent = `Actualizado: ${label}`);
+      }
+    } catch(e) {
+      console.warn('ranks.json no disponible, usando datos estaticos');
+    }
+  }
+
+  loadRanks();
 </script>
 </body>
 </html>

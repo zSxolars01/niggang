@@ -1,0 +1,28 @@
+name: Update Player Ranks
+
+on:
+  schedule:
+    - cron: '0 8 * * *'   # todos los dias a las 8am UTC
+  workflow_dispatch:        # permite correrlo manualmente desde GitHub
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch ranks from Riot API
+        env:
+          RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
+        run: python3 fetch_ranks.py
+
+      - name: Commit updated ranks
+        run: |
+          git config user.name  "NIGGANG Bot"
+          git config user.email "bot@niggang.gg"
+          git add ranks.json
+          git diff --staged --quiet && echo "No changes" || \
+            (git commit -m "Auto-update player ranks" && git push)
