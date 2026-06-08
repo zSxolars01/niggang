@@ -335,8 +335,7 @@
       padding: 1.5rem;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.25s;
-      backdrop-filter: blur(6px);
+      transition: opacity 0.2s;
     }
 
     .modal-overlay.active { opacity: 1; pointer-events: all; }
@@ -349,13 +348,14 @@
       max-width: 660px;
       position: relative;
       overflow: hidden;
-      transform: translateY(24px) scale(0.97);
-      transition: transform 0.28s cubic-bezier(0.22,1,0.36,1);
+      transform: translateY(20px);
+      transition: transform 0.25s ease, opacity 0.2s ease;
       max-height: 90vh;
       overflow-y: auto;
+      will-change: transform, opacity;
     }
 
-    .modal-overlay.active .modal { transform: translateY(0) scale(1); }
+    .modal-overlay.active .modal { transform: translateY(0); }
 
     .modal-top-bar { height: 4px; width: 100%; flex-shrink: 0; }
 
@@ -828,10 +828,7 @@
     .btn:active { transform: translateY(0); }
 
     /* ── MODAL ANIMACION MEJORADA ── */
-    .modal {
-      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.3s ease;
-      opacity: 0;
-    }
+    .modal { opacity: 0; }
     .modal-overlay.active .modal { opacity: 1; }
 
     /* ── HERO ANIMACION ENTRADA ── */
