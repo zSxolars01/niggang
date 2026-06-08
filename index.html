@@ -1242,8 +1242,19 @@
 </div>
 
 <script>
-  const PATCH = '15.10.1';
-  const CDN = `https://ddragon.leagueoflegends.com/cdn/${PATCH}/img/champion/`;
+  let CDN = 'https://ddragon.leagueoflegends.com/cdn/15.10.1/img/champion/';
+
+  // Obtener el patch mas reciente dinamicamente
+  fetch('https://ddragon.leagueoflegends.com/api/versions.json')
+    .then(r => r.json())
+    .then(versions => {
+      CDN = `https://ddragon.leagueoflegends.com/cdn/${versions[0]}/img/champion/`;
+      // Actualizar iconos ya cargados
+      document.querySelectorAll('.pick-icon').forEach(img => {
+        if (img.dataset.champKey) img.src = champImg(img.dataset.champKey);
+      });
+    })
+    .catch(() => {});
 
   function champImg(key) {
     const exceptions = {
@@ -1454,7 +1465,7 @@
 
     document.getElementById('modalPicks').innerHTML = p.picks.map(pk => `
       <div class="pick-item">
-        <img class="pick-icon" src="${champImg(pk.key)}" onerror="this.style.opacity='0.2'" alt="${pk.name}" />
+        <img class="pick-icon" src="${champImg(pk.key)}" data-champ-key="${pk.key}" onerror="this.style.opacity='0.2'" alt="${pk.name}" />
         <span class="pick-name">${pk.name}</span>
         <span class="pick-wr">${pk.wr}</span>
         <span class="pick-tier tier-${pk.tier.toLowerCase()}">${pk.tier}</span>
