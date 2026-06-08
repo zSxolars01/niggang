@@ -497,6 +497,67 @@
 
     .mobalytics-link:hover { background: rgba(0,170,255,0.1); }
 
+    /* CLIPS */
+    .modal-clips {
+      padding: 0 2rem 2rem;
+      border-top: 1px solid #001530;
+      padding-top: 1.4rem;
+    }
+
+    .clips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.8rem;
+    }
+
+    .clip-slot {
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      background: rgba(0,20,50,0.5);
+      border: 1px solid #001a3a;
+      aspect-ratio: 16/9;
+    }
+
+    .clip-slot iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .clip-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: rgba(200,216,240,0.2);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: default;
+    }
+
+    .clip-placeholder-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px dashed rgba(0,170,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: rgba(0,170,255,0.3);
+    }
+
+    @media (max-width: 520px) {
+      .clips-grid { grid-template-columns: 1fr; }
+    }
+
     /* FOOTER */
     footer {
       text-align: center;
@@ -706,6 +767,7 @@
         <a id="modalMoba" class="mobalytics-link" href="#" target="_blank" rel="noopener">Ver en OP.GG</a>
       </div>
     </div>
+    <div class="modal-clips" id="modalClips"></div>
   </div>
 </div>
 
@@ -736,7 +798,8 @@
         { name: 'Gangplank',   key: 'gangplank',   wr: '100%',  tier: 'S' },
         { name: 'Pantheon',    key: 'pantheon',    wr: '50.0%', tier: 'A' },
       ],
-      info: { 'Servidor': 'LAN', 'Partidas Top': '26 juegos', 'Estilo': 'Tanque / Carry', 'KDA Medio': '6.4 / 6.8 / 8.3' }
+      info: { 'Servidor': 'LAN', 'Partidas Top': '26 juegos', 'Estilo': 'Tanque / Carry', 'KDA Medio': '6.4 / 6.8 / 8.3' },
+      clips: []
     },
 
     hwidban: {
@@ -752,7 +815,8 @@
         { name: 'Talon',   key: 'talon',   wr: '46.2%', tier: 'A' },
         { name: 'Ekko',    key: 'ekko',    wr: '30.0%', tier: 'A' },
       ],
-      info: { 'Servidor': 'LAN', 'Partidas Jungle': '291 juegos', 'Estilo': 'Assassin / Invade', 'KDA Medio': '8.0 / 6.2 / 7.9' }
+      info: { 'Servidor': 'LAN', 'Partidas Jungle': '291 juegos', 'Estilo': 'Assassin / Invade', 'KDA Medio': '8.0 / 6.2 / 7.9' },
+      clips: []
     },
 
     zSxolars: {
@@ -768,7 +832,8 @@
         { name: 'Akali',  key: 'akali',  wr: '50.0%', tier: 'A' },
         { name: 'Sylas',  key: 'sylas',  wr: '50.0%', tier: 'A' },
       ],
-      info: { 'Servidor': 'LAN', 'Partidas Mid': '26 juegos', 'Estilo': 'Mage / Assassin', 'KDA Medio': '5.6 / 8.0 / 6.8' }
+      info: { 'Servidor': 'LAN', 'Partidas Mid': '26 juegos', 'Estilo': 'Mage / Assassin', 'KDA Medio': '5.6 / 8.0 / 6.8' },
+      clips: []
     },
 
     DizzyL: {
@@ -784,7 +849,8 @@
         { name: 'Aphelios', key: 'aphelios', wr: '52.9%', tier: 'A' },
         { name: "Kai'Sa",   key: 'kaisa',    wr: '60.0%', tier: 'A' },
       ],
-      info: { 'Servidor': 'LAN', 'Partidas ADC': '105 juegos', 'Estilo': 'Hypercarry / Positioning', 'KDA Medio': '9.2 / 5.0 / 7.4' }
+      info: { 'Servidor': 'LAN', 'Partidas ADC': '105 juegos', 'Estilo': 'Hypercarry / Positioning', 'KDA Medio': '9.2 / 5.0 / 7.4' },
+      clips: []
     },
 
     PykeTyson: {
@@ -800,7 +866,8 @@
         { name: 'Volibear', key: 'volibear', wr: '60.0%', tier: 'S' },
         { name: 'Amumu',    key: 'amumu',    wr: '66.7%', tier: 'A' },
       ],
-      info: { 'Servidor': 'LAN', 'Partidas': '102 juegos', 'Estilo': 'Engage / Assassin', 'KDA Medio': '6.8 / 5.5 / 8.4' }
+      info: { 'Servidor': 'LAN', 'Partidas': '102 juegos', 'Estilo': 'Engage / Assassin', 'KDA Medio': '6.8 / 5.5 / 8.4' },
+      clips: []
     },
 
     /* ── ACADEMIA ── */
@@ -818,7 +885,8 @@
         { name: 'Darius', key: 'darius', wr: '0.0%',  tier: 'A' },
         { name: 'Teemo',  key: 'teemo',  wr: '100%',  tier: 'A' },
       ],
-      info: { 'Servidor': 'LAN', 'Partidas Top': '27 juegos', 'Estilo': 'Split Push / Duelist', 'KDA Medio': '6.1 / 7.7 / 6.1' }
+      info: { 'Servidor': 'LAN', 'Partidas Top': '27 juegos', 'Estilo': 'Split Push / Duelist', 'KDA Medio': '6.1 / 7.7 / 6.1' },
+      clips: []
     },
 
     Risardo: {
@@ -834,7 +902,8 @@
         { name: 'Kindred', key: 'kindred', wr: '37.5%', tier: 'A' },
         { name: 'Sejuani', key: 'sejuani', wr: '20.0%', tier: 'A' },
       ],
-      info: { 'Servidor': 'LAN', 'Partidas Jungle': '77 juegos', 'Estilo': 'Tanque / Engage', 'KDA Medio': '6.7 / 5.4 / 10.1' }
+      info: { 'Servidor': 'LAN', 'Partidas Jungle': '77 juegos', 'Estilo': 'Tanque / Engage', 'KDA Medio': '6.7 / 5.4 / 10.1' },
+      clips: []
     },
 
     T1Tocino: {
@@ -850,7 +919,8 @@
         { name: 'Zoe',    key: 'zoe',    wr: '50.0%', tier: 'A' },
         { name: 'Ekko',   key: 'ekko',   wr: '100%',  tier: 'A' },
       ],
-      info: { 'Servidor': 'LAN', 'Partidas Mid': '28 juegos', 'Estilo': 'Assassin / Roamer', 'KDA Medio': '6.9 / 7.8 / 7.0' }
+      info: { 'Servidor': 'LAN', 'Partidas Mid': '28 juegos', 'Estilo': 'Assassin / Roamer', 'KDA Medio': '6.9 / 7.8 / 7.0' },
+      clips: []
     },
 
     DjChurches: {
@@ -866,7 +936,8 @@
         { name: 'Jhin',    key: 'jhin',    wr: '66.7%', tier: 'A' },
         { name: 'Ashe',    key: 'ashe',    wr: '44.4%', tier: 'A' },
       ],
-      info: { 'Servidor': 'LAN', 'Partidas ADC': '102 juegos', 'Estilo': 'Scaling / Damage', 'KDA Medio': '9.1 / 6.1 / 8.4' }
+      info: { 'Servidor': 'LAN', 'Partidas ADC': '102 juegos', 'Estilo': 'Scaling / Damage', 'KDA Medio': '9.1 / 6.1 / 8.4' },
+      clips: []
     },
 
     Cangreburgito: {
@@ -879,7 +950,8 @@
       picks: [
         { name: 'Veigar', key: 'veigar', wr: '100%',  tier: 'S' },
       ],
-      info: { 'Servidor': 'LAN', 'Partidas': '7 juegos', 'Estilo': 'En desarrollo', 'Rol en equipo': 'Suplente Flex' }
+      info: { 'Servidor': 'LAN', 'Partidas': '7 juegos', 'Estilo': 'En desarrollo', 'Rol en equipo': 'Suplente Flex' },
+      clips: []
     },
   };
 
@@ -920,8 +992,44 @@
 
     document.getElementById('modalMoba').href = p.mobaUrl;
 
+    // CLIPS
+    const clipsEl = document.getElementById('modalClips');
+    const clips = p.clips || [];
+    const NUM_SLOTS = 2;
+
+    let clipsHTML = `<p class="modal-section-title" style="margin-bottom:0.8rem">Highlights</p><div class="clips-grid">`;
+
+    for (let i = 0; i < NUM_SLOTS; i++) {
+      const url = clips[i];
+      if (url) {
+        const embed = toEmbedUrl(url);
+        clipsHTML += `<div class="clip-slot"><iframe src="${embed}" allowfullscreen allow="autoplay; encrypted-media"></iframe></div>`;
+      } else {
+        clipsHTML += `
+          <div class="clip-slot">
+            <div class="clip-placeholder">
+              <div class="clip-placeholder-icon">&#9654;</div>
+              <span>Proximo clip</span>
+            </div>
+          </div>`;
+      }
+    }
+
+    clipsHTML += '</div>';
+    clipsEl.innerHTML = clipsHTML;
+
     document.getElementById('modalOverlay').classList.add('active');
     document.body.style.overflow = 'hidden';
+  }
+
+  function toEmbedUrl(url) {
+    // YouTube: youtu.be/ID  o  youtube.com/watch?v=ID
+    const yt = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/))([A-Za-z0-9_-]{11})/);
+    if (yt) return `https://www.youtube.com/embed/${yt[1]}?rel=0`;
+    // Twitch clip: clips.twitch.tv/SLUG o twitch.tv/clip/SLUG
+    const tw = url.match(/(?:clips\.twitch\.tv\/|twitch\.tv\/\w+\/clip\/)([A-Za-z0-9_-]+)/);
+    if (tw) return `https://clips.twitch.tv/embed?clip=${tw[1]}&parent=${location.hostname}`;
+    return url;
   }
 
   function closeModal() {
