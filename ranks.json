@@ -1,15 +1,45 @@
 {
-  "updated": "2026-06-07T00:00:00Z",
+  "updated": "2026-06-08T01:13:21Z",
   "players": {
-    "juanYF":        { "display": "Platinum 2 · 43 LP",  "wr": "58.8%" },
-    "hwidban":       { "display": "Master · 517 LP",      "wr": "50.1%" },
-    "zSxolars":      { "display": "Platinum 4 · 92 LP",   "wr": "45.6%" },
-    "DizzyL":        { "display": "Diamond 4 · 3 LP",     "wr": "52.8%" },
-    "PykeTyson":     { "display": "Emerald 4 · 99 LP",    "wr": "55.8%" },
-    "stately":       { "display": "Emerald 4 · 42 LP",    "wr": "44.8%" },
-    "Risardo":       { "display": "Diamond 4 · 83 LP",    "wr": "48.5%" },
-    "T1Tocino":      { "display": "Platinum 4 · 13 LP",   "wr": "52.6%" },
-    "DjChurches":    { "display": "Gold 3 · 14 LP",       "wr": "52.8%" },
-    "Cangreburgito": { "display": "Unranked",              "wr": "-" }
+    "juanYF": {
+      "display": "Platinum 2 · 43 LP",
+      "wr": "58.8%"
+    },
+    "hwidban": {
+      "display": "Master · 517 LP",
+      "wr": "50.1%"
+    },
+    "zSxolars": {
+      "display": "Platinum 4 · 92 LP",
+      "wr": "45.6%"
+    },
+    "DizzyL": {
+      "display": "Diamond 4 · 3 LP",
+      "wr": "52.8%"
+    },
+    "PykeTyson": {
+      "display": "Emerald 4 · 99 LP",
+      "wr": "55.8%"
+    },
+    "stately": {
+      "display": "Emerald 4 · 42 LP",
+      "wr": "44.8%"
+    },
+    "Risardo": {
+      "display": "Diamond 4 · 83 LP",
+      "wr": "48.5%"
+    },
+    "T1Tocino": {
+      "display": "Platinum 4 · 13 LP",
+      "wr": "52.6%"
+    },
+    "DjChurches": {
+      "display": "Gold 3 · 14 LP",
+      "wr": "52.8%"
+    },
+    "Cangreburgito": {
+      "display": "Unranked",
+      "wr": "-"
+    }
   }
 }
