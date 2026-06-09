@@ -320,6 +320,27 @@
       margin-top: 0.4rem;
     }
 
+    .suspended-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255,40,40,0.12);
+      border: 1px solid rgba(255,40,40,0.6);
+      color: #ff4444;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 3px;
+      pointer-events: none;
+    }
+
+    .member-card.card-suspended {
+      opacity: 0.6;
+      filter: grayscale(0.5);
+    }
+
     .role-mid    { border-color: rgba(255,80,180,0.5);  color: #ff50b4; background: rgba(255,80,180,0.07); }
     .role-top    { border-color: rgba(255,160,0,0.5);   color: #ffa000; background: rgba(255,160,0,0.07); }
     .role-adc    { border-color: rgba(255,60,60,0.5);   color: #ff4040; background: rgba(255,60,60,0.07); }
@@ -1114,7 +1135,8 @@
       <p class="card-hint">Ver perfil</p>
     </div>
 
-    <div class="member-card" onclick="openModal('DizzyL')">
+    <div class="member-card card-suspended" onclick="openModal('DizzyL')">
+      <span class="suspended-badge">Suspendido</span>
       <img class="member-avatar" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/6638.jpg" alt="DizzyL" />
       <div class="member-nick">DizzyL</div>
       <div class="card-rank">Diamond 4 · 3 LP</div>
