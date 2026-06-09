@@ -320,20 +320,36 @@
       margin-top: 0.4rem;
     }
 
-    .suspended-badge {
+    .sticky-note {
       position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(255,40,40,0.12);
-      border: 1px solid rgba(255,40,40,0.6);
-      color: #ff4444;
-      font-size: 0.62rem;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      background: #fffde7;
+      color: #333;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 3px;
+      padding: 6px 10px;
+      border-radius: 2px;
+      box-shadow: 2px 3px 8px rgba(0,0,0,0.4);
+      white-space: nowrap;
       pointer-events: none;
+      z-index: 2;
+      letter-spacing: 0.5px;
+    }
+
+    .sticky-note::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 12px;
+      background: #ffca28;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }
 
     .member-card.card-suspended {
@@ -1136,7 +1152,7 @@
     </div>
 
     <div class="member-card card-suspended" onclick="openModal('DizzyL')">
-      <span class="suspended-badge">TILTED</span>
+      <div class="sticky-note">Se fue a simpearle a patas</div>
       <img class="member-avatar" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/6638.jpg" alt="DizzyL" />
       <div class="member-nick">DizzyL</div>
       <div class="card-rank">Diamond 4 · 3 LP</div>
