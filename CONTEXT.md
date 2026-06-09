@@ -70,7 +70,7 @@ Base URL: `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/g
 - **Íconos campeones:** DDragon CDN con patch dinámico (fetch versions.json)
 - **Íconos perfil:** CommunityDragon `/latest/`
 - **Ranks:** `ranks.json` actualizado por GitHub Actions diariamente
-- **Riot API Key:** Personal API Key aprobada — `RGAPI-ddd7e805-8963-43a2-be0c-b3e6477e72a0`
+- **Riot API Key:** Personal API Key aprobada (guardada SOLO en Cloudflare Worker — nunca commitear)
   - App ID: 844641, Nombre: "LAN COMPETITIVE TEAM NUEVO LEON SAMUEL GARCIA REGIO"
   - No expira cada 24h (Personal Key)
 
