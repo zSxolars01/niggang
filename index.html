@@ -1664,7 +1664,9 @@
       const data = await res.json();
       const ranks = data.players || {};
 
-      Object.entries(ranks).forEach(([pid, info]) => {
+      const rankEntries = Object.entries(ranks);
+
+      rankEntries.forEach(([pid, info]) => {
         // update cards
         document.querySelectorAll(`[onclick="openModal('${pid}')"] .card-rank`)
           .forEach(el => el.textContent = info.display);
@@ -1674,8 +1676,8 @@
         }
       });
 
-      // show last updated timestamp
-      if (data.updated) {
+      // only show timestamp if real player data was returned
+      if (data.updated && rankEntries.length > 0) {
         const d = new Date(data.updated);
         const label = d.toLocaleString('es-MX', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
         window.__ranksUpdated = label;
