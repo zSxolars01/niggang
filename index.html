@@ -1665,8 +1665,8 @@
       // show last updated timestamp
       if (data.updated) {
         const d = new Date(data.updated);
-        const label = d.toLocaleDateString('es-MX', { day:'2-digit', month:'short', year:'numeric' });
-        document.querySelectorAll('.ranks-updated').forEach(el => el.textContent = `Actualizado: ${label}`);
+        const label = d.toLocaleString('es-MX', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+        document.querySelectorAll('.ranks-updated').forEach(el => el.textContent = `Ultima actualizacion: ${label}`);
       }
     } catch(e) {
       console.warn('ranks.json no disponible, usando datos estaticos');
