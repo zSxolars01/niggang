@@ -1642,20 +1642,20 @@
 
   // ── SCROLL REVEAL ──
   (function() {
-    const els = document.querySelectorAll('.member-card, .stat-box, .section-header, .about-banner, .reveal');
-    els.forEach(el => el.classList.add('reveal'));
-    const cards = document.querySelectorAll('.member-card');
-    cards.forEach((el, i) => { el.dataset.revealDelay = i * 70; });
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          const delay = parseInt(e.target.dataset.revealDelay || 0);
+    const items = Array.from(document.querySelectorAll('.member-card, .stat-box, .section-header, .about-banner'));
+    items.forEach(el => el.classList.add('reveal'));
+    document.querySelectorAll('.member-card').forEach((el, i) => { el.dataset.revealDelay = i * 100; });
+    requestAnimationFrame(() => {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          const delay = +e.target.dataset.revealDelay || 0;
           setTimeout(() => e.target.classList.add('visible'), delay);
           obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        });
+      }, { threshold: 0.15 });
+      items.forEach(el => obs.observe(el));
+    });
   })();
 
   // ── AUTO-UPDATE RANKS ──
