@@ -1644,7 +1644,7 @@
   (function() {
     const items = Array.from(document.querySelectorAll('.member-card, .stat-box, .section-header, .about-banner'));
     items.forEach(el => el.classList.add('reveal'));
-    document.querySelectorAll('.member-card').forEach((el, i) => { el.dataset.revealDelay = i * 180; });
+    document.querySelectorAll('.member-card').forEach((el, i) => { el.dataset.revealDelay = 200 + i * 180; });
     requestAnimationFrame(() => {
       const obs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
