@@ -658,7 +658,7 @@
     .reveal {
       opacity: 0;
       transform: translateY(36px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transition: opacity 1s ease, transform 1s ease;
     }
 
     .reveal.visible {
@@ -1644,7 +1644,7 @@
   (function() {
     const items = Array.from(document.querySelectorAll('.member-card, .stat-box, .section-header, .about-banner'));
     items.forEach(el => el.classList.add('reveal'));
-    document.querySelectorAll('.member-card').forEach((el, i) => { el.dataset.revealDelay = i * 100; });
+    document.querySelectorAll('.member-card').forEach((el, i) => { el.dataset.revealDelay = i * 180; });
     requestAnimationFrame(() => {
       const obs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
