@@ -1660,7 +1660,7 @@
           obs.unobserve(e.target);
         });
       }, { threshold: 0.15 });
-      items.forEach(el => obs.observe(el));
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     });
   })();
 
