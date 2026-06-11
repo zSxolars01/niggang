@@ -1642,12 +1642,14 @@
 
   // ── SCROLL REVEAL ──
   (function() {
+    const cards = document.querySelectorAll('.member-card');
+    cards.forEach((el, i) => { el.style.transitionDelay = (i * 0.07) + 's'; });
     const els = document.querySelectorAll('.member-card, .stat-box, .section-header, .about-banner, .reveal');
     els.forEach(el => el.classList.add('reveal'));
     const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
+      entries.forEach((e) => {
         if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 60);
+          e.target.classList.add('visible');
           obs.unobserve(e.target);
         }
       });
